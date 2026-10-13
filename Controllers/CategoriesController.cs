@@ -22,5 +22,19 @@ namespace RaceCompetitionAPI.Controllers
 
             return Ok(categories);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategory(int id)
+        {
+            var categories = await _context.Categories.FindAsync(id);
+
+            if (categories == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(categories);
+        }
+
     }
 }
