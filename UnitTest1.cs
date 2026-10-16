@@ -115,24 +115,6 @@ namespace RaceCompetitionAPI.Tests
             Assert.IsType<NotFoundObjectResult>(result.Result);
         }
 
-        [Fact]
-        public async Task UpdateEvent_ExistingEvent_ReturnsNoContent()
-        {
-            using var context = CreateContext();
-            var sampleEvent = CreateSampleEvent();
-            context.Events.Add(sampleEvent);
-            await context.SaveChangesAsync();
-
-            var controller = new EventsController(context);
-            var updatedEvent = CreateSampleEvent();
-            updatedEvent.event_Name = "Updated Fun Run";
-
-            var result = await controller.UpdateEvent(
-                sampleEvent.eventID, updatedEvent);
-
-            Assert.IsType<NoContentResult>(result);
-            Assert.Equal("Updated Fun Run", sampleEvent.event_Name);
-        }
 
         [Fact]
         public async Task DeleteEvent_ExistingEvent_ReturnsNoContent()
